@@ -1,20 +1,15 @@
 import * as functions from "firebase-functions";
 import * as express from 'express';
-import { MongoClient, ObjectId } from 'mongodb';
 import * as cors from 'cors';
-
+import { ObjectId } from 'mongodb';
+import Client from './mongodb.config';
 
 const app = express();
 app.use(express.json());
 
 app.use(cors({ origin: true }))
 
-const uri = 'mongodb+srv://user:pass.word@cluster0.2gpmf.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
-const Client = () => (
-	new MongoClient(uri, {
-  	useNewUrlParser: true,
-  	useUnifiedTopology: true,
-}));
+
 
 app.post('/news', async (req, res) => {
 	const client = Client();
